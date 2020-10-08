@@ -83,7 +83,8 @@ def quickSort(arr,low,high):
         # partition and after partition 
         quickSort(arr, low, pi-1) 
         quickSort(arr, pi+1, high) 
-        
+
+"""
 def shellSort(arr): 
   
     # Start with a big gap, then reduce the gap 
@@ -113,6 +114,7 @@ def shellSort(arr):
             arr[j] = temp 
         gap /= 2
         gap = int(gap)
+"""
 
 def truncate(number, decimals=0):
     """
