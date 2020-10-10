@@ -66,11 +66,6 @@ def partition(arr,low,high):
     arr[i+1],arr[high] = arr[high],arr[i+1] 
     return ( i+1 ) 
   
-# The main function that implements QuickSort 
-# arr[] --> Array to be sorted, 
-# low  --> Starting index, 
-# high  --> Ending index 
-  
 # Function to do Quick sort 
 def quickSort(arr,low,high): 
     if low < high: 
@@ -84,37 +79,22 @@ def quickSort(arr,low,high):
         quickSort(arr, low, pi-1) 
         quickSort(arr, pi+1, high) 
 
-"""
-def shellSort(arr): 
+# This code is contributed by Mohit Kumra        
+def insertionSort(arr): 
   
-    # Start with a big gap, then reduce the gap 
-    n = len(arr) 
-    gap = n/2
-    gap = int(gap)
-    # Do a gapped insertion sort for this gap size. 
-    # The first gap elements a[0..gap-1] are already in gapped  
-    # order keep adding one more element until the entire array 
-    # is gap sorted 
-    while gap > 0: 
+    # Traverse through 1 to len(arr) 
+    for i in range(1, len(arr)): 
   
-        for i in range(gap,n): 
+        key = arr[i] 
   
-            # add a[i] to the elements that have been gap sorted 
-            # save a[i] in temp and make a hole at position i 
-            temp = arr[i] 
-  
-            # shift earlier gap-sorted elements up until the correct 
-            # location for a[i] is found 
-            j = i 
-            while  j >= gap and arr[j-gap] >temp: 
-                arr[j] = arr[j-gap] 
-                j -= gap 
-  
-            # put temp (the original a[i]) in its correct location 
-            arr[j] = temp 
-        gap /= 2
-        gap = int(gap)
-"""
+        # Move elements of arr[0..i-1], that are 
+        # greater than key, to one position ahead 
+        # of their current position 
+        j = i-1
+        while j >=0 and key < arr[j] : 
+                arr[j+1] = arr[j] 
+                j -= 1
+        arr[j+1] = key 
 
 def truncate(number, decimals=0):
     """
@@ -130,112 +110,166 @@ def truncate(number, decimals=0):
     factor = 10.0 ** decimals
     return math.trunc(number * factor) / factor
 
+w = open('algtest.txt', 'w')
+
+sorted_list = list(range(1, 10000))
+sorted_listcopy = sorted_list.copy()
+
+reverse_list = sorted_list.copy()
+reverse_list.reverse()
+reverse_listcopy = reverse_list.copy()
+
+ave_list = []
+for i in range(100):
+    ave_list.append([])
+for i in range(100):
+    for j in range(10000):
+        ave_list[i].append(j)
+for i in range(100):
+    random.shuffle(ave_list[i])
+
 
 totalb = 0
 averageb = 0
-totalm = 0
-averagem = 0
-totalq = 0
-averageq = 0
-totals = 0
-averages = 0
+totala = 0
+averagea = 0
+totalw = 0
+averagew = 0
 
-low = 0
-high = 998
+for x in range(1):
+    #B best case is sorted
+    
+    sorted_list = sorted_listcopy.copy()
+    
+    ave_listb = ave_list[x].copy()
+    
+    #B worst case is reverse sorted
+    reverse_list = reverse_listcopy.copy()
+    
+    start = time.perf_counter_ns()
+    bubbleSort(sorted_list)
+    stop = time.perf_counter_ns()
+    #print(best_list)
+    duration = (stop - start)
+    #print("Bubble sort completed " + str(duration) + " seconds")
+    totalb = totalb + duration
+    
+    start = time.perf_counter_ns()
+    bubbleSort(ave_listb)
+    stop = time.perf_counter_ns()
+    #print(ave_list)
+    duration = (stop - start)
+    #print("Bubble sort completed " + str(duration) + " seconds")
+    totala = totala + duration
+    
+    start = time.perf_counter_ns()
+    bubbleSort(reverse_list)
+    stop = time.perf_counter_ns()
+    #print(worst_list)
+    duration = (stop - start)
+    #print("Bubble sort completed " + str(duration) + " seconds")
+    totalw = totalw + duration
+   
+averageb = truncate(((totalb/100)* 10**-9), 7)
+w.write("Bubble sort best time complexity average is: " + str(averageb) + " seconds")
+averagea = truncate(((totala/100)* 10**-9), 7)
+w.write("Bubble sort average time complexity is: " + str(averagea) + " seconds")
+averagew = truncate(((totalw/100)* 10**-9), 7)
+w.write("Bubble sort worst time complexity average is: " + str(averagew) + " seconds") 
+   
+totalb = 0
+averageb = 0
+totala = 0
+averagea = 0
+totalw = 0
+averagew = 0
 
-a_list = list(range(1, 1000))
+for x in range(100):
     
-#random.shuffle(a_list)
+    ave_listm = ave_list[x].copy()
     
-a_listcopy = a_list.copy()
+    start = time.perf_counter_ns()
+    mergeSort(ave_listm)
+    stop = time.perf_counter_ns()
+    #print(ave_list)
+    duration = (stop - start)
+    #print("Merge sort completed " + str(duration) + " seconds")
+    totala = totala + duration
 
-# start = time.perf_counter_ns()
-# bubbleSort(a_list)
-# stop = time.perf_counter_ns()
-# #print(a_list)
-# duration = (stop - start)
-# print("Bubble sort completed " + str(duration) + " seconds")
-# totalb = totalb + duration
+averagea = truncate(((totala/100)* 10**-9), 7)
+w.write("Merge sort average time complexity is: " + str(averagea) + " seconds")
 
-# a_list = a_listcopy.copy()
-# start = time.perf_counter_ns()
-# mergeSort(a_list)
-# stop = time.perf_counter_ns()
-# #print(a_list)
-# duration = (stop - start)
-# print("Merge sort completed " + str(duration) + " seconds")
-# totalm = totalm + duration
+totalb = 0
+averageb = 0
+totala = 0
+averagea = 0
+totalw = 0
+averagew = 0
+    
+for x in range(100):
+    low = 0
+    high = 9998
+    
+    #Q average case is random array
+    ave_listq = ave_list[x].copy()
+    
+    #Q worst case is sorted
+    worst_list = sorted_listcopy.copy()
+    
+    start = time.perf_counter_ns()
+    quickSort(ave_listq, low, high)
+    stop = time.perf_counter_ns()
+    #print(ave_list)
+    duration = (stop - start)
+    #print("Quick sort completed " + str(duration) + " seconds")
+    totala = totala + duration
+    
+    start = time.perf_counter_ns()
+    quickSort(worst_list, low, high)
+    stop = time.perf_counter_ns()
+    #print(worst_list)
+    duration = (stop - start)
+    #print("Quick sort completed " + str(duration) + " seconds")
+    totalw = totalw + duration
 
-a_list = a_listcopy.copy()
-start = time.perf_counter_ns()
-quickSort(a_list, low, high)
-stop = time.perf_counter_ns()
-#print(a_list)
-duration = truncate(((stop - start)* 10**-9), 7)
-print("Quick sort completed " + str(duration) + " seconds")
-totalq = totalq + duration
+averagea = truncate(((totala/100)* 10**-9), 7)
+w.write("Quick sort average time complexity is: " + str(averagea) + " seconds")
+averagew = truncate(((totalw/100)* 10**-9), 7)
+w.write("Quick sort worst time complexity average is: " + str(averagew) + " seconds")
 
-# a_list = a_listcopy.copy()
-# start = time.perf_counter_ns()
-# shellSort(a_list)
-# stop = time.perf_counter_ns()
-# #print(a_list)
-# duration = (stop - start)
-# print("Shell sort completed " + str(duration) + " seconds")
-# totals = totals + duration
+totalb = 0
+averageb = 0
+totala = 0
+averagea = 0
+totalw = 0
+averagew = 0    
 
+for x in range(1):
+      
+    #I best case is sorted
+    best_list = sorted_listcopy.copy()
+    
+    ave_listi = ave_list[x].copy()
+    
+    start = time.perf_counter_ns()
+    insertionSort(best_list)
+    stop = time.perf_counter_ns()
+    #print(best_list)
+    duration = (stop - start)
+    #print("Insertion sort completed " + str(duration) + " seconds")
+    totalb = totalb + duration
+    
+    start = time.perf_counter_ns()
+    insertionSort(ave_listi)
+    stop = time.perf_counter_ns()
+    #print(ave_list)
+    duration = (stop - start)
+    #print("Insertion sort completed " + str(duration) + " seconds")
+    totala = totala + duration
+    
+averageb = truncate(((totalb/100)* 10**-9), 7)
+w.write("Insertion sort best time complexity average is: " + str(averageb) + " seconds")
+averagea = truncate(((totala/100)* 10**-9), 7)
+w.write("Insertion sort average time complexity is: " + str(averagea) + " seconds")
 
-# for x in range(0, 1000):
-#     low = 0
-#     high = 998
-    
-#     a_list = list(range(1, 1000))
-    
-#     random.shuffle(a_list)
-    
-#     a_listcopy = a_list.copy()
-    
-#     start = time.perf_counter_ns()
-#     bubbleSort(a_list)
-#     stop = time.perf_counter_ns()
-#     #print(a_list)
-#     duration = (stop - start)
-#     #print("Bubble sort completed " + str(duration) + " seconds")
-#     totalb = totalb + duration
-    
-#     a_list = a_listcopy.copy()
-#     start = time.perf_counter_ns()
-#     mergeSort(a_list)
-#     stop = time.perf_counter_ns()
-#     #print(a_list)
-#     duration = (stop - start)
-#     #print("Merge sort completed " + str(duration) + " seconds")
-#     totalm = totalm + duration
-    
-#     a_list = a_listcopy.copy()
-#     start = time.perf_counter_ns()
-#     quickSort(a_list, low, high)
-#     stop = time.perf_counter_ns()
-#     #print(a_list)
-#     duration = (stop - start)
-#     #print("Quick sort completed " + str(duration) + " seconds")
-#     totalq = totalq + duration
-    
-#     a_list = a_listcopy.copy()
-#     start = time.perf_counter_ns()
-#     shellSort(a_list)
-#     stop = time.perf_counter_ns()
-#     #print(a_list)
-#     duration = (stop - start)
-#     #print("Shell sort completed " + str(duration) + " seconds")
-#     totals = totals + duration
-    
-    
-# averageb = truncate(((totalb/1000)* 10**-9), 7)
-# print(averageb)
-# averagem = truncate(((totalm/1000)* 10**-9), 7)
-# print(averagem)
-# averageq = truncate(((totalq/1000)* 10**-9), 7)
-# print(averageq)
-# averages = truncate(((totals/1000)* 10**-9), 7)
-# print(averages)
+# duration = truncate(((stop - start)* 10**-9), 7)
