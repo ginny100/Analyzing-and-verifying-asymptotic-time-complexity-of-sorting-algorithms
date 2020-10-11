@@ -1,0 +1,13 @@
+For 1 loops and 1000 array elements
+
+Bubble sort best time complexity average is: 0.0517763 seconds
+Bubble sort average time complexity is: 0.1250125 seconds
+
+Merge sort average time complexity is: 0.0069224 seconds
+
+Quick sort average time complexity is: 0.0025724 seconds
+Quick sort worst time complexity average is: 0.1622546 seconds
+
+Insertion sort best time complexity average is: 0.0002199 seconds
+Insertion sort average time complexity is: 0.0817036 seconds
+
