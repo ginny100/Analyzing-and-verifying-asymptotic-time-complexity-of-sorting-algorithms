@@ -1,4 +1,4 @@
-For 1 loops and 1000 array elements
+For 1 loop and 1000 array elements
 
 Bubble sort best time complexity average is: 0.0517763 seconds
 Bubble sort average time complexity is: 0.1250125 seconds
